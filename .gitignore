@@ -1,0 +1,23 @@
+.claude
+CLAUDE.md
+
+# Environment files with secrets
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+
+# Build artifacts
+*.class
+*.jar
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp

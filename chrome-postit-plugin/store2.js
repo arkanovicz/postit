@@ -1,0 +1,1 @@
+../shared/store2.js

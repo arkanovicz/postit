@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Postit Test Page</title>
+  <link rel="stylesheet" href="postit.css">
+  <style>
+    body { font-family: sans-serif; padding: 40px; }
+    h1 { color: #333; }
+    p { max-width: 600px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Postit Test Page</h1>
+  <p>This page tests the postit functionality in standalone mode (no extension).</p>
+  <p>Click the yellow + button (bottom-right) to create a new postit.</p>
+  <p>Features to test:</p>
+  <ul>
+    <li>Create new note (random color, position, rotation)</li>
+    <li>Edit note content (click edit icon on hover)</li>
+    <li>Drag note to reposition</li>
+    <li>Minimize note (goes to tray bottom-left)</li>
+    <li>Restore from tray (click mini note)</li>
+    <li>Delete note</li>
+    <li>Persistence (refresh page, notes should remain)</li>
+  </ul>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+  <script src="store2.js"></script>
+  <script src="postit-bridge.js"></script>
+  <script src="postit.js"></script>
+</body>
+</html>

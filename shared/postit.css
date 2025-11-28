@@ -1,0 +1,253 @@
+/* (o) Postit - Browser Plugin Styles */
+
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://fonts.gstatic.com/s/reeniebeanie/v20/z7NSdR76eDkaJKZJFkkjuvWxXPq1.woff2') format('woff2');
+}
+
+#postit-overlay {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2147483647;
+  margin: 0;
+  padding: 0;
+}
+
+#postit-overlay.dragging {
+  pointer-events: all;
+}
+
+#postit-overlay.hidden {
+  display: none;
+}
+
+/* postit wrapper */
+
+.postit-wrapper {
+  position: absolute;
+  transition: transform 0.3s ease;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+.postit-wrapper.minimized {
+  user-select: none;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+/* postit note */
+
+.postit {
+  line-height: 1;
+  text-align: center;
+  width: 275px;
+  margin: 25px;
+  min-height: 250px;
+  padding-top: 35px;
+  position: relative;
+  border: 1px solid #E8E8E8;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 22px;
+  border-top: solid 60px;
+  border-bottom-right-radius: 60px 5px;
+  display: inline-block;
+  pointer-events: all;
+  cursor: move;
+  box-sizing: border-box;
+}
+
+.postit .postit-content {
+  position: relative;
+  top: -60px;
+  min-height: 150px;
+  padding: 10px;
+  outline: none;
+}
+
+.postit.edited .postit-content {
+  cursor: text;
+}
+
+.postit .postit-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* shadow curl effect */
+.postit::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 20px;
+  width: 200px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
+  transform: matrix(-1, -0.1, 0, 1, 0, 0);
+}
+
+/* colors */
+
+.yellow.postit {
+  border-top-color: #fdfd86;
+  background: linear-gradient(135deg, #ffff88 81%, #ffffc6 100%);
+}
+
+.green.postit {
+  border-top-color: #c1fdc1;
+  background: linear-gradient(135deg, #c3ffc3 81%, #e2ffe2 100%);
+}
+
+.pink.postit {
+  border-top-color: #fd86fd;
+  background: linear-gradient(135deg, #ff88ff 81%, #ffc6ff 100%);
+}
+
+.cyan.postit {
+  border-top-color: #c1c1fd;
+  background: linear-gradient(135deg, #c3c3ff 81%, #e2e2ff 100%);
+}
+
+.blue.postit {
+  border-top-color: #86fdfd;
+  background: linear-gradient(135deg, #88ffff 81%, #c6ffff 100%);
+}
+
+.sienna.postit {
+  border-top-color: #fdc1c1;
+  background: linear-gradient(135deg, #ffc3c3 81%, #ffe2e2 100%);
+}
+
+/* header (edit/delete buttons) */
+
+.postit-header {
+  display: none;
+  position: absolute;
+  top: -50px;
+  right: 5px;
+  left: 5px;
+  font-size: 14px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.postit-wrapper:not(.minimized) .postit:not(.edited):hover .postit-header {
+  display: flex;
+}
+
+.postit-header button,
+.postit-footer button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+.postit-header button:hover,
+.postit-footer button:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.1);
+}
+
+/* footer (save/cancel) */
+
+.postit-footer {
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+  right: 5px;
+  font-size: 14px;
+  display: none;
+  justify-content: space-between;
+}
+
+.postit.edited .postit-footer {
+  display: flex;
+}
+
+/* floating action button */
+
+#postit-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ffff88;
+  border: 2px solid #e8e888;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483647;
+  pointer-events: all;
+  transition: transform 0.2s;
+}
+
+#postit-fab:hover {
+  transform: scale(1.1);
+}
+
+#postit-fab.hidden {
+  display: none;
+}
+
+/* minimized notes tray (bottom-left) */
+
+#postit-tray {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  z-index: 2147483647;
+  pointer-events: none;
+}
+
+#postit-tray .postit-mini {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  border: 2px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+  pointer-events: all;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform 0.2s;
+}
+
+#postit-tray .postit-mini:hover {
+  transform: scale(1.15);
+}
+
+#postit-tray .postit-mini.yellow { background: #ffff88; }
+#postit-tray .postit-mini.green { background: #c3ffc3; }
+#postit-tray .postit-mini.pink { background: #ff88ff; }
+#postit-tray .postit-mini.cyan { background: #c3c3ff; }
+#postit-tray .postit-mini.blue { background: #88ffff; }
+#postit-tray .postit-mini.sienna { background: #ffc3c3; }
+
+#postit-tray.hidden {
+  display: none;
+}
