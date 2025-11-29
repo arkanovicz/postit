@@ -10,7 +10,6 @@
   let dragging = null;
   let dragStart = null;
   let editingNote = null;
-  let origContent = '';
 
   // --- Storage helpers ---
 
@@ -83,18 +82,12 @@
           </div>
         </div>
         <div class="postit-content">${note.content || ''}</div>
-        <div class="postit-footer">
-          <button class="cancel" title="Cancel">&#10005; Cancel</button>
-          <button class="save" title="Save">&#10003; Save</button>
-        </div>
       </div>
     `;
 
     wrapper.querySelector('.minimize').addEventListener('click', () => minimizeNote(note.id));
     wrapper.querySelector('.edit').addEventListener('click', () => startEdit(wrapper));
     wrapper.querySelector('.delete').addEventListener('click', () => deleteNote(note.id));
-    wrapper.querySelector('.cancel').addEventListener('click', () => cancelEdit(wrapper));
-    wrapper.querySelector('.save').addEventListener('click', () => saveEdit(wrapper));
 
     wrapper.addEventListener('mousedown', onDragStart);
 
@@ -190,40 +183,47 @@
     const content = wrapper.querySelector('.postit-content');
     postit.classList.add('edited');
     content.contentEditable = true;
-    origContent = content.innerHTML;
     editingNote = wrapper.dataset.id;
     content.focus();
+    // Place cursor at end of content
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(content);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    // Auto-save on input
+    content.addEventListener('input', () => saveContent(wrapper));
+    // Escape to blur
+    content.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') endEdit(wrapper);
+    });
+    // End edit on blur
+    content.addEventListener('blur', () => endEdit(wrapper));
   }
 
-  function cancelEdit(wrapper) {
-    const postit = wrapper.querySelector('.postit');
+  function saveContent(wrapper) {
     const content = wrapper.querySelector('.postit-content');
-    postit.classList.remove('edited');
-    content.contentEditable = false;
-
-    // If new note with no content, delete it
-    if (!origContent && !content.innerHTML.trim()) {
-      let notes = loadNotes();
-      notes = notes.filter(n => n.id !== wrapper.dataset.id);
-      saveNotes(notes);
-      wrapper.remove();
-    } else {
-      content.innerHTML = origContent;
-    }
-    editingNote = null;
-  }
-
-  function saveEdit(wrapper) {
-    const postit = wrapper.querySelector('.postit');
-    const content = wrapper.querySelector('.postit-content');
-    postit.classList.remove('edited');
-    content.contentEditable = false;
-
     const notes = loadNotes();
     const note = notes.find(n => n.id === wrapper.dataset.id);
     if (note) {
       note.content = content.innerHTML;
       saveNotes(notes);
+    }
+  }
+
+  function endEdit(wrapper) {
+    if (!editingNote) return;
+    const postit = wrapper.querySelector('.postit');
+    const content = wrapper.querySelector('.postit-content');
+    postit.classList.remove('edited');
+    content.contentEditable = false;
+    // Delete empty new notes
+    if (!content.innerHTML.trim()) {
+      let notes = loadNotes();
+      notes = notes.filter(n => n.id !== wrapper.dataset.id);
+      saveNotes(notes);
+      wrapper.remove();
     }
     editingNote = null;
   }
