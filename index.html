@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postit - Sticky Notes Demo</title>
+  <link rel="stylesheet" href="shared/postit.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+      color: #fff;
+    }
+    .demo-content {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .tagline {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    .features {
+      text-align: left;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+    .features li {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+    .hint {
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    a { color: #ffd700; }
+  </style>
+</head>
+<body>
+  <div class="demo-content">
+    <h1>(o) Postit</h1>
+    <p class="tagline">Sticky notes for your browser</p>
+
+    <ul class="features">
+      <li>Click the <strong>+</strong> button (bottom right) to create a note</li>
+      <li>Drag notes anywhere on the page</li>
+      <li>Click the pencil to edit, content auto-saves</li>
+      <li>Minimize notes to the tray (bottom left)</li>
+      <li>Notes persist in localStorage</li>
+    </ul>
+
+    <p class="hint">
+      This is a plugin-less demo. Install the
+      <a href="https://github.com/user/postit">browser extension</a>
+      for cross-device sync and per-page notes.
+    </p>
+  </div>
+
+  <script src="shared/store2.js"></script>
+  <script src="shared/postit-bridge.js"></script>
+  <script src="shared/postit.js"></script>
+</body>
+</html>
