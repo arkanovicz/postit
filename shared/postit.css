@@ -21,6 +21,7 @@
 
 #postit-overlay.dragging {
   pointer-events: all;
+  user-select: none;
 }
 
 #postit-overlay.hidden {
