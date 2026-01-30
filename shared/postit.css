@@ -35,6 +35,7 @@
   transition: transform 0.3s ease;
   transform-origin: 0 0;
   pointer-events: none;
+  isolation: isolate;
 }
 
 .postit-wrapper.minimized {
@@ -56,6 +57,7 @@
   border: 1px solid #E8E8E8;
   font-family: 'Reenie Beanie', cursive;
   font-size: 22px;
+  color: #333;
   border-top: solid 60px;
   border-bottom-right-radius: 60px 5px;
   display: inline-block;
@@ -82,7 +84,7 @@
   overflow-y: auto;
 }
 
-/* shadow curl effect */
+/* shadow curl effect (light for dark mode) */
 .postit::after {
   content: "";
   position: absolute;
@@ -91,8 +93,7 @@
   bottom: 20px;
   width: 200px;
   height: 25px;
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
+  box-shadow: 2px 15px 3px rgba(255, 255, 255, 0.8);
   transform: matrix(-1, -0.1, 0, 1, 0, 0);
 }
 
