@@ -10,6 +10,7 @@
   let dragging = null;
   let dragStart = null;
   let editingNote = null;
+  let zIndexCounter = 1;
 
   // In-memory cache for API mode
   let notesCache = [];
@@ -156,6 +157,7 @@
     wrapper.style.left = note.x + 'px';
     wrapper.style.top = note.y + 'px';
     wrapper.style.transform = `rotate(${note.rotate}deg)`;
+    wrapper.style.zIndex = zIndexCounter++;
 
     wrapper.innerHTML = `
       <div class="${note.color} postit">
@@ -333,6 +335,8 @@
     dragStart = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     dragging = wrapper;
     overlay.classList.add('dragging');
+    // Bring to top while dragging and after
+    wrapper.style.zIndex = zIndexCounter++;
 
     document.addEventListener('mousemove', onDragMove);
     document.addEventListener('mouseup', onDragEnd);

@@ -84,7 +84,7 @@
   overflow-y: auto;
 }
 
-/* shadow curl effect (light for dark mode) */
+/* shadow curl effect */
 .postit::after {
   content: "";
   position: absolute;
@@ -93,7 +93,8 @@
   bottom: 20px;
   width: 200px;
   height: 25px;
-  box-shadow: 2px 15px 3px rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
   transform: matrix(-1, -0.1, 0, 1, 0, 0);
 }
 
@@ -175,6 +176,7 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   cursor: pointer;
   font-size: 28px;
+  color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
