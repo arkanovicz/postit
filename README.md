@@ -19,3 +19,27 @@ Open `index.html` in your browser for a plugin-less demo (uses localStorage).
 - Minimize to tray
 - Per-URL storage (with extension)
 - Cross-device sync via browser storage API
+
+## API Mode
+
+For server-side storage, configure before loading the script:
+
+```html
+<script>
+  window.postitConfig = { apiUrl: '/api/postit' };
+</script>
+<script src="postit.js"></script>
+```
+
+Expected API endpoints:
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/postit` | List all notes |
+| POST | `/api/postit` | Create note |
+| PUT | `/api/postit/{id}` | Update note |
+| DELETE | `/api/postit/{id}` | Delete note |
+
+Note payload: `{ id, color, x, y, rotate, content, minimized }`
+
+When `apiUrl` is set, localStorage is bypassed entirely.
