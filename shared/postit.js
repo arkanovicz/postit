@@ -316,6 +316,8 @@
     const content = wrapper.querySelector('.postit-content');
     postit.classList.remove('edited');
     content.contentEditable = false;
+    // Deselect any selected text
+    window.getSelection().removeAllRanges();
     // Delete empty new notes
     if (!content.innerHTML.trim()) {
       await deleteNoteFromStorage(wrapper.dataset.id);

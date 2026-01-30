@@ -74,6 +74,10 @@
   outline: none;
 }
 
+.postit.edited {
+  cursor: text;
+}
+
 .postit.edited .postit-content {
   cursor: text;
   caret-color: #333;
