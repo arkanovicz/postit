@@ -4,7 +4,7 @@
   font-family: 'Reenie Beanie';
   font-style: normal;
   font-weight: 400;
-  src: url('https://fonts.gstatic.com/s/reeniebeanie/v20/z7NSdR76eDkaJKZJFkkjuvWxXPq1.woff2') format('woff2');
+  src: url('fonts/reenie-beanie.woff2') format('woff2');
 }
 
 #postit-overlay {
